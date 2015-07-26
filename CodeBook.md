@@ -126,7 +126,7 @@ dataTrain <- tbl_df(read.table(file.path(filesPath, "train", "X_train.txt" )))
 dataTest  <- tbl_df(read.table(file.path(filesPath, "test" , "X_test.txt" )))
 ```
 
-1. Merges the training and the test data to become one dataset.
+####1. Merges the training and the test data to become one dataset.
 
 Rename variables "subject" and "activityNum"
 
@@ -165,7 +165,7 @@ alldataSubjAct <- cbind(alldataSubject, alldataActivity)
 dataTable <- cbind(alldataSubjAct, dataTable)
 ```
 
-2. Extracts measurements with mean value and standard deviation value for each measurement.
+####2. Extracts measurements with mean value and standard deviation value for each measurement.
 
 Reading "features.txt" and extracting only the mean and standard deviation
 
@@ -180,7 +180,7 @@ dataFeaturesMeanStd <- union(c("subject","activityNum"), dataFeaturesMeanStd)
 dataTable<- subset(dataTable,select=dataFeaturesMeanStd) 
 ```
 
-3. Rename activities with user descriptive activity names in the dataset
+####3. Rename activities with user descriptive activity names in the dataset
 
 Merges name of activity into dataTable
 
@@ -197,9 +197,10 @@ dataAggr<- aggregate(. ~ subject - activityName, data = dataTable, mean)
 dataTable<- tbl_df(arrange(dataAggr,subject,activityName))
 ```
 
-4. Rename the labels of dataset with user descriptive variable names.
+####4. Rename the labels of dataset with user descriptive variable names.
 
 Leading t or f is based on time or frequency measurements.
+
 1. Body = related to body movement.
 2. Gravity = acceleration of gravity
 3. Acc = accelerometer measurement
@@ -221,7 +222,7 @@ names(dataTable)<-gsub("BodyBody", "Body", names(dataTable))
 ```
 
 
-5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+####5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 write to text file on disk
 
